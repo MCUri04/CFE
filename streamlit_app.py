@@ -41,15 +41,8 @@ def analizar_con_ia(texto_comentarios, llave_gemini):
     # Conectar con la llave secreta
     genai.configure(api_key=llave_gemini)
     
-    # Buscar automáticamente el nombre del motor disponible
-    nombre_correcto = None
-    for m in genai.list_models():
-        if 'generateContent' in m.supported_generation_methods:
-            nombre_correcto = m.name
-            break
-            
-    # Usar el motor que encontró
-    modelo = genai.GenerativeModel(nombre_correcto)
+    # Usar el motor exacto que pide Google
+    modelo = genai.GenerativeModel('gemini-3.8-flash')
     
     instruccion = f"""
     Actúa como un experto. Lee estos comentarios de YouTube y crea un reporte con:
