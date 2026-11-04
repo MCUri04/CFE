@@ -77,4 +77,4 @@ if st.button("🚀 Analizar Video"):
                 st.write(resultado)
                 
         except Exception as e:
-        st.error(f"Ocurrió un error detallado: {e}")
+            st.error(f"Ocurrió un error detallado: {e}")
