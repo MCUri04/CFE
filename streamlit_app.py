@@ -40,7 +40,7 @@ def extraer_comentarios(video_id, llave_youtube):
 def analizar_con_ia(texto_comentarios, llave_gemini):
     # Envía los comentarios a la IA de Google para que los lea y resuma
     genai.configure(api_key=llave_gemini)
-    odelo = genai.GenerativeModel('gemini-pro')
+    modelo = genai.GenerativeModel('gemini-pro')
     instruccion = f"""
     Actúa como un experto. Lee estos comentarios de YouTube y crea un reporte con:
     1. Sentimiento general (Positivo, Negativo o Neutral)
