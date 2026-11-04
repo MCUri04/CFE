@@ -38,9 +38,19 @@ def extraer_comentarios(video_id, llave_youtube):
     return " ".join(comentarios)
 
 def analizar_con_ia(texto_comentarios, llave_gemini):
-    # Envía los comentarios a la IA de Google para que los lea y resuma
+    # Conectar con la llave secreta
     genai.configure(api_key=llave_gemini)
-    modelo = genai.GenerativeModel('gemini-1.5-flash')
+    
+    # Buscar automáticamente el nombre del motor disponible
+    nombre_correcto = None
+    for m in genai.list_models():
+        if 'generateContent' in m.supported_generation_methods:
+            nombre_correcto = m.name
+            break
+            
+    # Usar el motor que encontró
+    modelo = genai.GenerativeModel(nombre_correcto)
+    
     instruccion = f"""
     Actúa como un experto. Lee estos comentarios de YouTube y crea un reporte con:
     1. Sentimiento general (Positivo, Negativo o Neutral)
